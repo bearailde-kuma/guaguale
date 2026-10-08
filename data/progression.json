@@ -1,0 +1,217 @@
+{
+  "initial_cash": 80,
+  "initial_spirit": 60,
+  "goal": 100000000000,
+  "pity_losses": 4,
+  "payout_weights": [
+    55,
+    28,
+    13,
+    3.5,
+    0.5
+  ],
+  "payout_multipliers": [
+    1,
+    2,
+    5,
+    15
+  ],
+  "resonance_factor": 1.6,
+  "upgrade_costs": [
+    100,
+    700,
+    5000,
+    35000,
+    250000,
+    1800000,
+    12000000,
+    80000000,
+    550000000,
+    3500000000,
+    20000000000,
+    60000000000
+  ],
+  "upgrade_gates": [
+    3,
+    12,
+    25,
+    40,
+    60,
+    85,
+    110,
+    140,
+    175,
+    210,
+    250,
+    300
+  ],
+  "skills": [
+    {
+      "id": "sight",
+      "name": "透视眼",
+      "cost": 8,
+      "scratched": 0,
+      "capacity": 60,
+      "key": "1",
+      "description": "刮开前看穿本张票是否中奖。"
+    },
+    {
+      "id": "luck",
+      "name": "好运来",
+      "cost": 18,
+      "scratched": 10,
+      "capacity": 60,
+      "key": "2",
+      "description": "下一张票中奖率增加 25 个百分点。"
+    },
+    {
+      "id": "boost",
+      "name": "就这把了",
+      "cost": 28,
+      "scratched": 25,
+      "capacity": 100,
+      "key": "3",
+      "description": "刮开前，让本张票最终奖金 ×3。"
+    }
+  ],
+  "activities": [
+    {
+      "id": "tea",
+      "name": "街边喝茶",
+      "cost": 20,
+      "restore": 20,
+      "duration": 1.2,
+      "unlock": 0,
+      "description": "一杯盖碗茶，慢慢回过神。"
+    },
+    {
+      "id": "massage",
+      "name": "推拿按摩",
+      "cost": 180,
+      "restore": 70,
+      "duration": 1.8,
+      "unlock": 1000,
+      "description": "松一松肩，运气也轻快起来。"
+    },
+    {
+      "id": "trip",
+      "name": "山城小旅行",
+      "cost": 1500,
+      "restore": 200,
+      "duration": 2.5,
+      "unlock": 30000,
+      "description": "穿过巷子，看看江边的晚霞。"
+    },
+    {
+      "id": "sea",
+      "name": "海岛度假",
+      "cost": 18000,
+      "restore": 9999,
+      "duration": 3.0,
+      "unlock": 800000,
+      "description": "听浪、发呆，精神力全部恢复。"
+    }
+  ],
+  "assets": [
+    {
+      "id": "car_1",
+      "name": "二手小钢炮",
+      "kind": "car",
+      "price": 60000,
+      "spirit": 20,
+      "fortune": 0.05,
+      "gate": 30,
+      "description": "有了自己的方向盘。"
+    },
+    {
+      "id": "home_1",
+      "name": "县城阳光小宅",
+      "kind": "home",
+      "price": 250000,
+      "spirit": 30,
+      "fortune": 0.08,
+      "gate": 45,
+      "description": "阳光照进自己的房间。"
+    },
+    {
+      "id": "car_2",
+      "name": "云豹 GT",
+      "kind": "car",
+      "price": 600000,
+      "spirit": 25,
+      "fortune": 0.12,
+      "gate": 60,
+      "description": "第一辆属于你的豪华轿跑。"
+    },
+    {
+      "id": "home_2",
+      "name": "城央大平层",
+      "kind": "home",
+      "price": 2000000,
+      "spirit": 40,
+      "fortune": 0.18,
+      "gate": 80,
+      "description": "把整座城市收进落地窗。"
+    },
+    {
+      "id": "car_3",
+      "name": "赤霄跑车",
+      "kind": "car",
+      "price": 5000000,
+      "spirit": 30,
+      "fortune": 0.25,
+      "gate": 100,
+      "description": "红色闪电驶过滨江大道。"
+    },
+    {
+      "id": "home_3",
+      "name": "湖畔独栋别墅",
+      "kind": "home",
+      "price": 18000000,
+      "spirit": 50,
+      "fortune": 0.35,
+      "gate": 120,
+      "description": "湖风吹来，烦恼都消散。"
+    },
+    {
+      "id": "car_4",
+      "name": "玄龙限量超跑",
+      "kind": "car",
+      "price": 35000000,
+      "spirit": 40,
+      "fortune": 0.5,
+      "gate": 145,
+      "description": "限量的速度，无限的想象。"
+    },
+    {
+      "id": "home_4",
+      "name": "云顶空中庄园",
+      "kind": "home",
+      "price": 150000000,
+      "spirit": 60,
+      "fortune": 0.75,
+      "gate": 170,
+      "description": "城市灯火，都在脚下。"
+    },
+    {
+      "id": "car_5",
+      "name": "麒麟典藏车王",
+      "kind": "car",
+      "price": 300000000,
+      "spirit": 50,
+      "fortune": 1,
+      "gate": 200,
+      "description": "你的私人车库，终于圆满。"
+    },
+    {
+      "id": "home_5",
+      "name": "山海私人庄园",
+      "kind": "home",
+      "price": 1500000000,
+      "spirit": 80,
+      "fortune": 1.5,
+      "gate": 240,
+      "description": "山海之间，收藏一整个梦。"
+    }
+  ]
+}

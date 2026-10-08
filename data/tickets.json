@@ -1,0 +1,7 @@
+[
+ {"id":"joy","name":"开门红","subtitle":"小小一刮，好运到家","price":10,"cells":3,"columns":3,"chance":0.52,"jackpot":50,"unlock_earned":0,"unlock_scratched":0,"color":"d95148","symbol":"福"},
+ {"id":"bamboo","name":"节节高","subtitle":"青竹报喜，步步生金","price":100,"cells":6,"columns":3,"chance":0.50,"jackpot":80,"unlock_earned":1000,"unlock_scratched":15,"color":"338475","symbol":"竹"},
+ {"id":"gold","name":"金玉满堂","subtitle":"金光一闪，满堂喝彩","price":1000,"cells":9,"columns":3,"chance":0.48,"jackpot":120,"unlock_earned":30000,"unlock_scratched":40,"color":"bd862f","symbol":"金"},
+ {"id":"dragon","name":"龙腾四海","subtitle":"龙行天下，鸿运当头","price":10000,"cells":12,"columns":4,"chance":0.46,"jackpot":180,"unlock_earned":800000,"unlock_scratched":80,"color":"5875a3","symbol":"龙"},
+ {"id":"fortune","name":"盛世鸿运","subtitle":"一纸锦绣，万里前程","price":100000,"cells":15,"columns":5,"chance":0.44,"jackpot":300,"unlock_earned":20000000,"unlock_scratched":140,"color":"925989","symbol":"鸿"}
+]
