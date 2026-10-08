@@ -9,7 +9,7 @@ static func load_data() -> void:
 		return
 	tickets = JSON.parse_string(FileAccess.get_file_as_string("res://data/tickets.json"))
 	config = JSON.parse_string(FileAccess.get_file_as_string("res://data/progression.json"))
-	assert(tickets.size() == 5, "Ticket catalog failed to load")
+	assert(not tickets.is_empty(), "Ticket catalog failed to load")
 	assert(config.has("assets"), "Progression catalog failed to load")
 
 static func money(value: float) -> String:
@@ -18,3 +18,9 @@ static func money(value: float) -> String:
 	if value >= 10000:
 		return "¥%.2f万" % (value / 10000.0)
 	return "¥%d" % int(value)
+
+static func tier_for_id(id: String) -> int:
+	load_data()
+	for i in tickets.size():
+		if tickets[i].id == id: return i
+	return -1

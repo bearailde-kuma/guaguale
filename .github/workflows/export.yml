@@ -33,13 +33,13 @@ jobs:
           done
       - uses: actions/upload-artifact@v4
         with:
-          name: FuyunLife-0.1.0-Windows
+          name: FuyunLife-0.2.0-Windows
           path: builds/windows/
       - uses: actions/upload-artifact@v4
         with:
-          name: FuyunLife-0.1.0-Linux
+          name: FuyunLife-0.2.0-Linux
           path: builds/linux/
       - uses: actions/upload-artifact@v4
         with:
-          name: FuyunLife-0.1.0-Web
+          name: FuyunLife-0.2.0-Web
           path: builds/web/

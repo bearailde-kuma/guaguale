@@ -1,91 +1,77 @@
 # 福运人生 · Fuyun Life
 
-中国街角体彩店里的单机增量游戏。用一枚硬币刮开好运，用超能力改变奖池，把小日子过成自己的财富故事。
+中国街角体彩店里的原创单机增量游戏。刮开银色涂层，按票面规则兑奖；用超能力改运，再把奖金换成车房、旅行与更强的自动化。
 
-**版本：0.1.0 可玩原型 · 引擎：Godot 4.5.1 Standard / GDScript · 无额外插件、无需账号、无需联网**
+**v0.2.0 · Godot 4.5.1 Standard · GDScript · Compatibility · 无额外插件**
 
-![游戏实机](docs/gameplay.png)
+![龙舟改运与技能组合](docs/dragon-combo.png)
 
-## 试玩
+## 开始玩
 
-Windows：下载试玩包，完整解压，双击 `FuyunLife.exe`。不需要安装 Godot。
+1. 安装 **Godot 4.5.1 Standard**，导入根目录 `project.godot`。
+2. 按 **F6/F5** 运行主场景。鼠标按住拖动硬币刮票，或按住 **空格**快速刮开。
+3. **1–7** 使用技能，**B** 再买同款，**Esc** 开关设置。
+4. 刮完 **12 张**解锁念力代刮。点击 **自动设置**选票、设备用金和后续技能策略，再按 **4**启动。
+5. 最终收集 5 辆车、5 套房，身家达到游戏中的 **1000 亿**。
 
-开发：下载 [Godot 4.5.1 Standard](https://godotengine.org/download/archive/4.5.1-stable/)，导入根目录 `project.godot`，按 F6/F5 运行主场景。
+已有 v0.1 本机存档会自动迁移，钱、收藏和已有进度保留。已购旧版票先按原结果兑奖；下一张使用新玩法。启动游戏后自动化默认暂停，按 4 继续。
 
-推荐 1280×800；窗口可缩放，画面按比例适配。Windows 导出已生成，实际运行验证在 Linux 软件渲染环境完成，Windows 实机兼容性待后续试玩确认。
+## v0.2 改了什么
 
-## 怎么玩
+| 票种 | 票价 | 规则 |
+| --- | ---: | --- |
+| 开门红 | 10 | 任意位置凑齐 3 个同号，按号码奖表兑奖 |
+| 节节高 | 20 | 你的号码匹配幸运号码，获得对应格奖金 |
+| 龙舟夺锦 | 50 | 按船员顺序加乘，末位 ×0 可以清零 |
+| 金玉满堂 | 100 | 收集至少 3 个「宝」，按数量兑对应奖 |
+| 灯火长安 | 200 | 横、竖、对角线三同号，多条中奖线相加 |
+| 山河寻宝 | 300 | 每行三个数字之和恰好为 18，兑该行奖金 |
+| 梨园双绝 | 500 | 同行两个脸谱同字同色，兑该行奖金 |
+| 九州宝库 | 1000 | 同行三个号码全部被上方钥匙覆盖，开启宝库 |
 
-1. 左侧选票。按住鼠标左键拖动硬币，把每个银色区域刮开。
-2. 格子里显示的金额相加后自动兑奖；未中奖的格子不产生收益。
-3. `1` 透视眼：购买后、刮开前看到是否中奖。`2` 好运来：购买下一张前使用。`3` 就这把了：购买后、刮开前将本张奖金 ×3。透视后再决定加倍率，是一条基本策略。
-4. 精神力自然缓慢恢复；生活菜单有喝茶、推拿、旅行、海岛度假，也有免费静坐。
-5. 投资聚财升级提高所有新票奖金，购买车房提高精神上限和永久财运。
-6. 刮满 30 张解锁长按空格快速刮票；`B` 再买同款；`Esc` 打开设置或关闭面板。
-7. 收齐 5 辆车、5 套房，身家达到 1000 亿，获得虚构游戏世界的“全国首富”结局。通关后可继续玩。
+每张票都显示规则和奖表，奖金由真实的数字/符号规则计算。不是先给一个数字，再把它藏到某个刮区。
 
-设置里支持音效开关、减少动态、划过即刮。没有真钱充值、广告或内购。
+- **7 个技能**：透视眼、好运来、就这把了、念力代刮、点石成金、聚宝连锁、福运爆发。
+- **能形成组合**：透视龙舟 ×0 → 点石成金改为 ×2 → 就这把了放大到 ×8–18；连锁和度假可继续叠加。
+- **分阶段自动化**：购票、刮开、兑奖；再解锁自动好运、自动透视/改运/加倍、自动娱乐续航。3 级效率升级、备用金保护、精神不足等待，菜单打开时暂停。
+- **车房有用途**：车提高加倍技能、刮速并减免娱乐费用；房增加精神恢复，并解锁自动组合和自动续航。
+- **娱乐有持续收益**：茶减精神消耗、按摩加刮速、旅行/度假提高后续若干张票的奖金。
+- **正反馈**：中奖位置高亮、龙舟危险标记、奖金公式、改运前后变化、大奖弹幕与粒子音效。
 
-## 本版内容
+这是虚构游戏经济，票价、概率和超能力用于增量成长，不对应真实彩票承诺。主题图案为项目原创像素绘制，未复制 Scritchy Scratchy 的素材或代码。
 
-- 5 种原创中式票面，3 / 6 / 9 / 12 / 15 个可实际刮除的区域。
-- 硬币指针、银粉碎屑、合成刮擦音、兑奖音和大奖庆祝。
-- 3 种主动技能，12 级永久聚财升级，4 种付费恢复活动。
-- 5 辆虚构车辆、5 套房产；车房、旅游、工作和技能的小动画。
-- 首张教学票固定中奖且明确提示；连续 4 张未中奖后保证下一张中奖。
-- 打工和免费静坐保障不会因资金或精神耗尽而卡死。
-- 单槽自动存档、原子写入、备用存档、购票结果与随机数状态保存。
-- 资金、刮票张数、前序收藏的组合解锁，防止一次大奖跳过完整成长。
+## 开发与维护
 
-## 开发结构
+```text
+scenes/main.tscn               主场景
+scripts/core/ticket_rules.gd   独立生成/验奖/已揭示中奖提示
+scripts/core/economy.gd        奖级概率与最终奖金计算
+scripts/core/game_state.gd     钱包、技能、活动、自动循环、收藏事务
+scripts/core/save_store.gd     schema 2 校验、原子保存、v0.1 迁移
+scripts/ui/scratch_card.gd     各票种布局与银层刮擦
+scripts/ui/main.gd             场景组合、菜单、动画和反馈
+scripts/ui/pixel_art.gd        原创像素绘制
+scripts/core/audio.gd          程序音效
+data/tickets.json             8 种票的配置
+data/progression.json         技能、资产、活动、自动效率、升级数值
+tests/                       核心回归和成长模拟
+docs/                        设计、开发、验证、更新日志和截图
+```
 
-| 路径 | 职责 |
-| --- | --- |
-| `data/tickets.json` | 票价、格数、中奖率、大奖倍率、解锁、颜色 |
-| `data/progression.json` | 技能、活动、资产、升级价格、收益系数、终局条件 |
-| `scripts/core/economy.gd` | 注入随机数的纯奖池计算 |
-| `scripts/core/game_state.gd` | 唯一数值事务入口、解锁、技能、兑奖 |
-| `scripts/core/save_store.gd` | 存档校验、版本和原子写入 |
-| `scripts/core/audio.gd` | 程序合成音效，和玩法随机数相互独立 |
-| `scripts/ui/scratch_card.gd` | 空间刮擦、覆盖率、票面展示 |
-| `scripts/ui/main.gd` | 场景组合、UI、输入、动画和反馈 |
-| `scripts/ui/pixel_art.gd` | 可替换的程序像素绘制 |
-| `tests/` | 核心回归检查和使用真实游戏逻辑的数值模拟 |
-| `docs/` | 设计、迭代说明、模拟结果、实机截图 |
-
-增加内容和改数值请从 [开发指南](docs/DEVELOPMENT.md) 开始。下一轮设计参考 [玩法设计](docs/DESIGN.md)。
-
-## 测试与导出
-
-安装 Godot 4.5.1，并将可执行程序命名为 `godot` 放入 PATH：
+请先读 [开发指南](docs/DEVELOPMENT.md)、[数值与设计](docs/DESIGN.md)、[验证记录](docs/VALIDATION.md) 和 [更新日志](CHANGELOG.md)。
 
 ```bash
 godot --headless --path . --editor --import
 godot --headless --path . --script tests/run_tests.gd -- --test
 godot --headless --path . --script tests/simulate.gd -- --test
+# 有显示环境：实际画面与自动循环检查，不读写正式存档
+godot --path . -- --smoke
 ```
 
-模拟使用真实 `Game` 事务和 Godot 随机数，不是另一份近似公式。完整结果在 `docs/balance-report.json`。估计游玩时长不能代替真人试玩。
+`--seeds=10` 可用于快速数值试算；只有完整 100 种子运行才写入 `docs/balance-report.json`。GitHub Actions 包含检查工作流和手动执行的 Windows / Linux / Web 导出工作流。导出模板版本必须与 Godot 一致。
 
-安装相同版本的导出模板后：
+## 临时素材与边界
 
-```bash
-mkdir -p builds/windows builds/linux builds/web
-godot --headless --path . --export-release "Windows Desktop"
-godot --headless --path . --export-release "Linux"
-godot --headless --path . --export-release "Web"
-```
+像素画、音效由代码生成。中文使用 Fusion Pixel Font（OFL），Godot 为 MIT；完整授权见 [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md)。
 
-Web 导出需要通过 HTTP 提供整个目录，不能直接双击 HTML：`python3 -m http.server 8000 --directory builds/web`。浏览器保存使用本地存储，清理站点数据会丢失进度。
-
-`.github/workflows/ci.yml` 检查每次提交；手动运行 `export.yml` 可以生成三平台构建。仓库未上传前这些工作流不会执行。
-
-## 存档和素材
-
-- Windows：`%APPDATA%\Godot\app_userdata\福运人生\progress.json`
-- Linux：`~/.local/share/godot/app_userdata/福运人生/progress.json`
-- 关闭窗口、数值事务、失焦和每 6 秒保存一次。已揭开的格子持久保存，尚未揭开格子的局部银粉轨迹不持久保存。
-- 购票结果在第一次刮擦前固定并保存；重开游戏不能换中奖结果。部分刮擦后也不能回头用透视或倍率。
-- 画面与音效为本项目原创程序素材。字体使用 Fusion Pixel Font（OFL-1.1）。详见 [素材与许可证](THIRD_PARTY_LICENSES.md)。
-
-灵感来自刮票增量游戏，包括 [Scritchy Scratchy](https://store.steampowered.com/app/3948120/Scritchy_Scratchy/)。本项目未使用该游戏的代码、图片、音频或名称标识；票面、车名、财富榜和赔率均为虚构游戏设定。
+目前是可继续迭代的桌面原型：没有离线收益、转生、云存档、正式配乐或完整移动端适配。自动化只在游戏运行时推进。数值模拟用于发现卡点和失控增长，不能替代真人试玩对手感和趣味性的反馈。

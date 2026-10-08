@@ -4,74 +4,105 @@
   "goal": 100000000000,
   "pity_losses": 4,
   "payout_weights": [
-    55,
+    45,
     28,
-    13,
-    3.5,
-    0.5
-  ],
-  "payout_multipliers": [
-    1,
+    17,
+    7,
     2,
-    5,
-    15
+    1
   ],
-  "resonance_factor": 1.6,
+  "resonance_factor": 1.2,
   "upgrade_costs": [
-    100,
-    700,
-    5000,
-    35000,
-    250000,
-    1800000,
-    12000000,
-    80000000,
-    550000000,
-    3500000000,
-    20000000000,
-    60000000000
+    120,
+    900,
+    9000,
+    80000,
+    650000,
+    5000000,
+    35000000,
+    220000000,
+    1500000000,
+    8000000000,
+    35000000000,
+    90000000000
   ],
   "upgrade_gates": [
     3,
-    12,
-    25,
+    15,
     40,
-    60,
-    85,
-    110,
+    80,
     140,
-    175,
-    210,
-    250,
-    300
+    220,
+    330,
+    480,
+    650,
+    850,
+    1100,
+    1400
   ],
   "skills": [
     {
       "id": "sight",
       "name": "透视眼",
-      "cost": 8,
+      "cost": 4,
       "scratched": 0,
       "capacity": 60,
       "key": "1",
-      "description": "刮开前看穿本张票是否中奖。"
+      "description": "预知本张精确奖金和危险格；再决定改运或加倍。"
     },
     {
       "id": "luck",
       "name": "好运来",
-      "cost": 18,
-      "scratched": 10,
+      "cost": 20,
+      "scratched": 5,
       "capacity": 60,
       "key": "2",
-      "description": "下一张票中奖率增加 25 个百分点。"
+      "description": "接下来 3 张必中至少第三档奖，头奖概率提高至 10%。"
     },
     {
       "id": "boost",
       "name": "就这把了",
       "cost": 28,
-      "scratched": 25,
-      "capacity": 100,
+      "scratched": 8,
+      "capacity": 60,
       "key": "3",
-      "description": "刮开前，让本张票最终奖金 ×3。"
+      "description": "本张票面奖金 ×8；每辆车再增加 2 倍。"
+    },
+    {
+      "id": "auto",
+      "name": "念力代刮",
+      "cost": 2,
+      "scratched": 12,
+      "capacity": 60,
+      "key": "4",
+      "description": "开关自动购票、刮开与兑奖，每张消耗 2 精神。"
+    },
+    {
+      "id": "alchemy",
+      "name": "点石成金",
+      "cost": 30,
+      "scratched": 25,
+      "capacity": 80,
+      "key": "5",
+      "description": "未刮票限一次：龙舟 ×0 改 ×2；其他空奖票改成第三档奖。"
+    },
+    {
+      "id": "chain",
+      "name": "聚宝连锁",
+      "cost": 40,
+      "scratched": 65,
+      "capacity": 140,
+      "key": "6",
+      "description": "接下来 5 张新票，奖金依次 ×2、×3、×4、×5、×6。"
+    },
+    {
+      "id": "burst",
+      "name": "福运爆发",
+      "cost": 90,
+      "scratched": 100,
+      "capacity": 200,
+      "key": "7",
+      "description": "下一张直接锁定票面头奖！每次使用后需刮完 20 张。"
     }
   ],
   "activities": [
@@ -79,37 +110,49 @@
       "id": "tea",
       "name": "街边喝茶",
       "cost": 20,
-      "restore": 20,
+      "price_factor": 0.4,
+      "restore_ratio": 0.4,
       "duration": 1.2,
       "unlock": 0,
-      "description": "一杯盖碗茶，慢慢回过神。"
+      "buff": "focus",
+      "charges": 6,
+      "description": "清心 6 张：技能精神消耗减少 25%。"
     },
     {
       "id": "massage",
       "name": "推拿按摩",
       "cost": 180,
-      "restore": 70,
+      "price_factor": 2.0,
+      "restore_ratio": 0.8,
       "duration": 1.8,
-      "unlock": 1000,
-      "description": "松一松肩，运气也轻快起来。"
+      "unlock": 350,
+      "buff": "flow",
+      "charges": 10,
+      "description": "手感 10 张：自动刮速 ×1.5，手动范围增大。"
     },
     {
       "id": "trip",
       "name": "山城小旅行",
       "cost": 1500,
-      "restore": 200,
+      "price_factor": 8.0,
+      "restore_ratio": 1.0,
       "duration": 2.5,
       "unlock": 30000,
-      "description": "穿过巷子，看看江边的晚霞。"
+      "buff": "inspired",
+      "charges": 12,
+      "description": "灵感 12 张：奖金 ×2，攒精神再爆发。"
     },
     {
       "id": "sea",
       "name": "海岛度假",
       "cost": 18000,
-      "restore": 9999,
+      "price_factor": 20.0,
+      "restore_ratio": 1.0,
       "duration": 3.0,
-      "unlock": 800000,
-      "description": "听浪、发呆，精神力全部恢复。"
+      "unlock": 2000000,
+      "buff": "holiday",
+      "charges": 24,
+      "description": "鸿运 24 张：奖金 ×3，与灵感取高值。"
     }
   ],
   "assets": [
@@ -117,101 +160,136 @@
       "id": "car_1",
       "name": "二手小钢炮",
       "kind": "car",
-      "price": 60000,
+      "price": 2000,
       "spirit": 20,
       "fortune": 0.05,
       "gate": 30,
-      "description": "有了自己的方向盘。"
+      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
     },
     {
       "id": "home_1",
       "name": "县城阳光小宅",
       "kind": "home",
-      "price": 250000,
-      "spirit": 30,
+      "price": 12000,
+      "spirit": 35,
       "fortune": 0.08,
-      "gate": 45,
-      "description": "阳光照进自己的房间。"
+      "gate": 60,
+      "description": "开启自动透视 / 改运 / 加倍",
+      "regen": 0.2
     },
     {
       "id": "car_2",
       "name": "云豹 GT",
       "kind": "car",
-      "price": 600000,
+      "price": 80000,
       "spirit": 25,
       "fortune": 0.12,
-      "gate": 60,
-      "description": "第一辆属于你的豪华轿跑。"
+      "gate": 100,
+      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
     },
     {
       "id": "home_2",
       "name": "城央大平层",
       "kind": "home",
-      "price": 2000000,
+      "price": 600000,
       "spirit": 40,
       "fortune": 0.18,
-      "gate": 80,
-      "description": "把整座城市收进落地窗。"
+      "gate": 150,
+      "description": "开启自动娱乐，精神不足自动补充",
+      "regen": 0.3
     },
     {
       "id": "car_3",
       "name": "赤霄跑车",
       "kind": "car",
       "price": 5000000,
-      "spirit": 30,
+      "spirit": 35,
       "fortune": 0.25,
-      "gate": 100,
-      "description": "红色闪电驶过滨江大道。"
+      "gate": 220,
+      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
     },
     {
       "id": "home_3",
       "name": "湖畔独栋别墅",
       "kind": "home",
-      "price": 18000000,
+      "price": 25000000,
       "spirit": 50,
       "fortune": 0.35,
-      "gate": 120,
-      "description": "湖风吹来，烦恼都消散。"
+      "gate": 320,
+      "description": "自动化速度上限继续提升",
+      "regen": 0.4
     },
     {
       "id": "car_4",
       "name": "玄龙限量超跑",
       "kind": "car",
-      "price": 35000000,
-      "spirit": 40,
+      "price": 100000000,
+      "spirit": 45,
       "fortune": 0.5,
-      "gate": 145,
-      "description": "限量的速度，无限的想象。"
+      "gate": 420,
+      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
     },
     {
       "id": "home_4",
       "name": "云顶空中庄园",
       "kind": "home",
-      "price": 150000000,
-      "spirit": 60,
+      "price": 500000000,
+      "spirit": 65,
       "fortune": 0.75,
-      "gate": 170,
-      "description": "城市灯火，都在脚下。"
+      "gate": 520,
+      "description": "长线挂机精神恢复再提升",
+      "regen": 0.6
     },
     {
       "id": "car_5",
       "name": "麒麟典藏车王",
       "kind": "car",
-      "price": 300000000,
-      "spirit": 50,
+      "price": 2000000000,
+      "spirit": 60,
       "fortune": 1,
-      "gate": 200,
-      "description": "你的私人车库，终于圆满。"
+      "gate": 650,
+      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
     },
     {
       "id": "home_5",
       "name": "山海私人庄园",
       "kind": "home",
-      "price": 1500000000,
-      "spirit": 80,
+      "price": 10000000000,
+      "spirit": 90,
       "fortune": 1.5,
-      "gate": 240,
-      "description": "山海之间，收藏一整个梦。"
+      "gate": 780,
+      "description": "精神恢复与收藏最终里程碑",
+      "regen": 0.8
     }
-  ]
+  ],
+  "lucky_weights": [
+    0,
+    0,
+    53,
+    28,
+    9,
+    10
+  ],
+  "automation_costs": [
+    2000,
+    80000,
+    2000000
+  ],
+  "automation_gates": [
+    40,
+    120,
+    300
+  ],
+  "automation_homes": [
+    0,
+    1,
+    2
+  ],
+  "automation_intervals": [
+    0.5,
+    0.36,
+    0.25,
+    0.17
+  ],
+  "base_regen": 0.4
 }
