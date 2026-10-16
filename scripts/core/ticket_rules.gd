@@ -13,6 +13,7 @@ static func shuffle_with(values: Array, rng: RandomNumberGenerator) -> Array:
 	return values
 
 static func make_board(t: Dictionary, grade: int, rng: RandomNumberGenerator) -> Dictionary:
+	if str(t.rule) in MysticRules.RULES: return MysticRules.make_board(t,grade,rng)
 	var units: int = 0 if grade < 0 else int(t.grades[grade])
 	var cells: Array = []
 	var board: Dictionary = {"rule":t.rule,"cells":cells,"prizes":[],"grades":t.grades.duplicate()}
@@ -98,6 +99,7 @@ static func make_board(t: Dictionary, grade: int, rng: RandomNumberGenerator) ->
 	return board
 
 static func evaluate(board: Dictionary) -> Dictionary:
+	if str(board.rule) in MysticRules.RULES: return MysticRules.evaluate(board)
 	var cells: Array = board.cells.duplicate()
 	# JSON stores numbers as floats; normalize before Array.count/membership.
 	for i in cells.size():
@@ -163,6 +165,7 @@ static func evaluate(board: Dictionary) -> Dictionary:
 	return {"units":total,"hits":hits,"detail":detail}
 
 static func cell_text(board: Dictionary, i: int) -> String:
+	if str(board.rule) in MysticRules.RULES: return MysticRules.cell_text(board,i)
 	var value: Variant = board.cells[i]
 	match str(board.rule):
 		"legacy": return Catalog.money(float(value)) if int(value)>0 else "空奖"
@@ -174,7 +177,8 @@ static func cell_text(board: Dictionary, i: int) -> String:
 
 static func visible_hits(ticket: Dictionary) -> Array:
 	var board: Dictionary = ticket.board.duplicate(true)
-	if board.rule=="dragon": return []
+	if board.rule=="dragon" or board.rule in MysticRules.RULES:
+		return evaluate(board).hits if not false in ticket.revealed else []
 	for i in board.cells.size():
 		if ticket.revealed[i]: continue
 		match str(board.rule):

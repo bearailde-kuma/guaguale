@@ -26,3 +26,14 @@ static func coin(canvas: CanvasItem, at: Vector2, scale: float = 1.0) -> void:
 static func plant(canvas: CanvasItem, at: Vector2) -> void:
 	for block in [[15,33,24,29,Color("bd6d4a")],[11,31,32,7,Color("edb77c")],[25,0,5,36,Color("437968")],[6,6,20,10,Color("5b9275")],[30,0,18,9,Color("70a387")],[31,19,17,8,Color("518971")],[10,22,17,8,Color("70a387")]]:
 		canvas.draw_rect(Rect2(at + Vector2(block[0], block[1]), Vector2(block[2], block[3])), block[4])
+
+static func skull(canvas: CanvasItem, at: Vector2, scale: float, color: Color) -> void:
+	for r in [Rect2(-10,-10,20,15),Rect2(-6,5,12,7)]: canvas.draw_rect(Rect2(at+r.position*scale,r.size*scale),color)
+	for r in [Rect2(-7,-5,5,5),Rect2(2,-5,5,5),Rect2(-2,2,4,3),Rect2(-3,8,2,4),Rect2(2,8,2,4)]: canvas.draw_rect(Rect2(at+r.position*scale,r.size*scale),Color("243b43"))
+
+static func cultivator(canvas: CanvasItem, at: Vector2, scale: float) -> void:
+	canvas.draw_circle(at+Vector2(0,-10)*scale,30*scale,Color("356366"))
+	for r in [Rect2(-20,14,40,10),Rect2(-14,-4,28,22),Rect2(-8,-22,16,17)]: canvas.draw_rect(Rect2(at+r.position*scale,r.size*scale),Color("b1cbb5"))
+	canvas.draw_rect(Rect2(at+Vector2(-10,-25)*scale,Vector2(20,7)*scale),Color("233842"))
+	canvas.draw_rect(Rect2(at+Vector2(-5,-31)*scale,Vector2(10,8)*scale),Color("233842"))
+	canvas.draw_rect(Rect2(at+Vector2(-3,-1)*scale,Vector2(6,20)*scale),GOLD)

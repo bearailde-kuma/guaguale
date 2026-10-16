@@ -7,7 +7,7 @@
     "price": 10,
     "cells": 9,
     "columns": 3,
-    "chance": 0.48,
+    "chance": 0.26,
     "jackpot": 50,
     "grades": [
       1,
@@ -21,7 +21,9 @@
     "unlock_scratched": 0,
     "color": "d95148",
     "symbol": "福",
-    "description": "任意位置凑齐 3 个相同数字，按右侧奖表兑奖。"
+    "description": "任意位置凑齐 3 个相同数字，按右侧奖表兑奖。",
+    "realm": 0,
+    "skull_chance": 0.01
   },
   {
     "id": "bamboo",
@@ -31,7 +33,7 @@
     "price": 20,
     "cells": 8,
     "columns": 4,
-    "chance": 0.48,
+    "chance": 0.25,
     "jackpot": 80,
     "grades": [
       2,
@@ -41,11 +43,13 @@
       60,
       80
     ],
-    "unlock_earned": 350,
+    "unlock_earned": 300,
     "unlock_scratched": 8,
     "color": "338475",
     "symbol": "竹",
-    "description": "下方号码与任一幸运号相同，获得该格对应奖金。"
+    "description": "下方号码与任一幸运号相同，获得该格对应奖金。",
+    "realm": 1,
+    "skull_chance": 0.0117
   },
   {
     "id": "dragon",
@@ -55,7 +59,7 @@
     "price": 50,
     "cells": 6,
     "columns": 6,
-    "chance": 0.42,
+    "chance": 0.24,
     "jackpot": 240,
     "grades": [
       2,
@@ -65,21 +69,23 @@
       60,
       240
     ],
-    "unlock_earned": 4000,
+    "unlock_earned": 5000,
     "unlock_scratched": 25,
     "color": "327b9e",
     "symbol": "舟",
-    "description": "从 0 开始，按船员从左到右加乘；末位 ×0 会清零！"
+    "description": "从 0 开始，按船员从左到右加乘；末位 ×0 会清零！",
+    "realm": 2,
+    "skull_chance": 0.0134
   },
   {
     "id": "gold",
-    "name": "金玉满堂",
-    "subtitle": "集宝成金",
-    "rule": "collect",
+    "name": "丹炉积灵",
+    "subtitle": "炼丹 · 面积",
+    "rule": "integral",
     "price": 100,
-    "cells": 12,
+    "cells": 6,
     "columns": 4,
-    "chance": 0.48,
+    "chance": 0.23,
     "jackpot": 160,
     "grades": [
       2,
@@ -89,21 +95,24 @@
       60,
       160
     ],
-    "unlock_earned": 30000,
-    "unlock_scratched": 65,
-    "color": "bd862f",
-    "symbol": "金",
-    "description": "统计全票「宝」字个数，至少 3 个，按奖表兑奖。"
+    "unlock_earned": 50000,
+    "unlock_scratched": 50,
+    "color": "#bc7845",
+    "symbol": "丹",
+    "description": "六炉宽×高相加；负面积扣除，净灵气达到 6 起奖。",
+    "cols": 3,
+    "realm": 2,
+    "skull_chance": 0.015099999999999999
   },
   {
     "id": "lantern",
-    "name": "灯火长安",
-    "subtitle": "三同连线",
-    "rule": "lines",
+    "name": "踏云问道",
+    "subtitle": "剑途 · 路径",
+    "rule": "path",
     "price": 200,
-    "cells": 9,
+    "cells": 8,
     "columns": 3,
-    "chance": 0.48,
+    "chance": 0.22,
     "jackpot": 200,
     "grades": [
       2,
@@ -113,21 +122,24 @@
       60,
       200
     ],
-    "unlock_earned": 200000,
-    "unlock_scratched": 120,
-    "color": "b65779",
-    "symbol": "灯",
-    "description": "横、竖或对角线上 3 个同号，获得该号码奖；多线相加。"
+    "unlock_earned": 500000,
+    "unlock_scratched": 90,
+    "color": "#548a90",
+    "symbol": "云",
+    "description": "按箭头走八步：全程不低于地面且回到原点，面积越大越值钱。",
+    "cols": 4,
+    "realm": 3,
+    "skull_chance": 0.0168
   },
   {
     "id": "river",
-    "name": "山河寻宝",
-    "subtitle": "十八点闯关",
-    "rule": "sum",
+    "name": "两仪归一",
+    "subtitle": "极限 · 收敛",
+    "rule": "limit",
     "price": 300,
-    "cells": 9,
+    "cells": 4,
     "columns": 3,
-    "chance": 0.48,
+    "chance": 0.21,
     "jackpot": 240,
     "grades": [
       2,
@@ -137,21 +149,24 @@
       60,
       240
     ],
-    "unlock_earned": 2000000,
-    "unlock_scratched": 200,
-    "color": "497f83",
-    "symbol": "山",
-    "description": "每条路线 3 个数字之和恰好为 18，获得该行奖金。"
+    "unlock_earned": 5000000,
+    "unlock_scratched": 140,
+    "color": "#756795",
+    "symbol": "极",
+    "description": "n 趋向无穷：上下同次幂才收敛，以 a/b 对照奖表；发散空奖。",
+    "cols": 2,
+    "realm": 4,
+    "skull_chance": 0.0185
   },
   {
     "id": "opera",
-    "name": "梨园双绝",
-    "subtitle": "脸谱配对",
-    "rule": "pairs",
+    "name": "周天剑阵",
+    "subtitle": "阵法 · 连通",
+    "rule": "circuit",
     "price": 500,
-    "cells": 8,
+    "cells": 9,
     "columns": 2,
-    "chance": 0.48,
+    "chance": 0.2,
     "jackpot": 280,
     "grades": [
       2,
@@ -161,21 +176,24 @@
       60,
       280
     ],
-    "unlock_earned": 20000000,
-    "unlock_scratched": 320,
-    "color": "9a524a",
-    "symbol": "戏",
-    "description": "同一行两张脸谱同字同色，即得该行奖金；各行相加。"
+    "unlock_earned": 50000000,
+    "unlock_scratched": 200,
+    "color": "#527f70",
+    "symbol": "阵",
+    "description": "从左侧灵源出发，邻格符脉双向相接，连通右侧阵眼得奖。",
+    "cols": 3,
+    "realm": 4,
+    "skull_chance": 0.0202
   },
   {
     "id": "fortune",
-    "name": "九州宝库",
-    "subtitle": "钥匙开库",
-    "rule": "vault",
+    "name": "万象衍天",
+    "subtitle": "天机 · 组合",
+    "rule": "convolution",
     "price": 1000,
-    "cells": 12,
+    "cells": 6,
     "columns": 3,
-    "chance": 0.48,
+    "chance": 0.19,
     "jackpot": 360,
     "grades": [
       2,
@@ -185,10 +203,13 @@
       60,
       360
     ],
-    "unlock_earned": 150000000,
-    "unlock_scratched": 500,
-    "color": "79629f",
-    "symbol": "鸿",
-    "description": "一行 3 个号码全部出现在上方钥匙中，获得该行奖金。"
+    "unlock_earned": 500000000,
+    "unlock_scratched": 280,
+    "color": "#995970",
+    "symbol": "衍",
+    "description": "六枚灵石各选或不选，凑齐目标灵气的组合越多，奖级越高。",
+    "cols": 3,
+    "realm": 5,
+    "skull_chance": 0.0219
   }
 ]

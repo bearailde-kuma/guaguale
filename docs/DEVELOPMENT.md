@@ -1,64 +1,70 @@
-# 迭代开发指南
+# v0.3 开发与更新
 
-## 架构
+Godot 4.5.1 Standard / Compatibility。直接导入 project.godot，无插件。源码目标仍为中文离线单机。
 
-Godot 4.5.1 Standard，GDScript，Compatibility。`Game` 是唯一经济状态入口；UI 发送意图并播放表现。当前没有第三方游戏框架。
+## 文件职责
 
-- `Catalog` 加载只读 JSON，用稳定 `id` 定位内容，不依赖列表索引长期存档。
-- `TicketRules.make_board()` 生成满足指定奖级的票面。`evaluate()` 仅从数字、图符、运算和规则得出票面奖，支持多组兑奖。
-- `Economy.roll()` 用注入的 RNG 抽中奖级、生成票；`recalculate()` 从票面重新验奖并应用倍率。
-- `Game` 管理购买、精神、技能、活动、升级、资产、自动循环与存档。UI 不修改钱或结果，`--smoke` 固定演示场景除外。
-- `ScratchCard` 管理银层网格、空间刮擦、八种布局和票面动画；不能自行决定奖金。
-- `main.gd` 为主场景、按钮、弹窗和短动画的组合入口。
+| 文件 | 职责 |
+|---|---|
+| data/tickets.json | 稳定 ID、规则 ID、面额、奖档、基础概率、每张骷髅率、解锁门槛、视觉主题 |
+| data/progression.json | 境界、技能、活动、资产、天赋、费用和效率曲线 |
+| core/ticket_rules.gd | 原三种规则，旧版规则的只读迁移兼容，分派数学规则 |
+| core/mystic_rules.gd | 五种数学票的生成、精确整数求值、组合计数、图遍历 |
+| core/economy.gd | 注入 RNG 的奖级选择，按实际 board 计算奖金 |
+| core/game_state.gd | 所有经济事务、境界、风险、自动化、轮回与元进度 |
+| core/save_store.gd | schema 验证、v1/v2→v3 迁移、原子存档与有效备份 |
+| ui/scratch_card.gd | 银层空间覆盖、八种票面图形和计算反馈 |
+| ui/main.gd | 操作路由、模态界面、天赋树、动画、运行验收入口 |
+| tests/*.gd | 事务回归、规则生成校验、多轮完整生涯模拟 |
 
-生成中奖等级不等于直接藏金额：先生成合法票面，再用独立验奖器复核；兑奖再次验奖，不信任单独的 `payout` 缓存。中奖号码和票面对应格奖金属于规则字段，而不是可直接相加的所有格金额。
+## 扩展规则
 
-## 扩展彩票
+1. 新票使用新稳定 ID；不按显示名称保存，不重排既有 ID 的语义。
+2. 实现 `make_board(catalog, grade, rng)`，负 grade 是未中奖，0–5 是目标奖档。
+3. 实现纯 `evaluate(board) -> {units, hits, detail}`。最终奖金只能从票面符号重算，不能信任缓存 payout。
+4. 在 `SaveStore.board_valid` 注册严格形状和数字范围，在 `ScratchCard` 注册布局。检查暗牌图形不能提前泄漏未揭示数值。
+5. 为每档和空奖做生成测试、JSON 往返测试，以及独立手工例子；不要只比较生成器与自身拷贝。
 
-1. 在 `tickets.json` 增加稳定 `id`、独立 `rule`、价格、六档 `grades`、颜色、说明和解锁条件。
-2. 在 `TicketRules` 添加生成、验奖、显示文字；支持从 JSON 读回后的浮点数。
-3. 在 `SaveStore.board_valid()` 增加结构验证，在 `ScratchCard` 增加对应布局。
-4. 加入每档中奖、未中奖、组合中奖、保存/恢复后的规则测试。
-5. 如超过八种，调整票柜/自动设置的分页布局。当前并未把有限布局伪装成无限扩展。
+数学票不执行动态表达式。积分只处理分段常数矩形；极限用正整数系数和 1–3 次幂做符号判断；路径枚举合法八步路径；阵法用双向连接 BFS；组合票用倒序子集和 DP。C(6,3)=20 等测试用独立已知结果检验。
 
-所有生成、洗牌、改运只使用 `Game.rng`。不可使用全局 `randf()` 或 UI RNG 决定奖金。`visible_hits()` 只使用已经揭示的格子，不能泄露未刮结果。
+## 事务约束
 
-## 技能与自动化
+- Gameplay RNG 只能由核心使用；像素、粒子、合成音效使用独立 RNG。
+- 购票时确定 board、所有购票加成、skull_index、risk_chance 和 RNG 后续状态，并立即保存。
+- 精神没有被动恢复；asset/breakthrough 只增上限，不填充精神。
+- 第一处银层损坏即标记 started，之后不允许望气、改命、倍化、替劫。
+- 骷髅是每张最多一个的附加图案，字段与 board 分离；改命不能重抽。揭示一次只计一次。
+- 达到 skull_limit，先结束本世，致命票不支付，余格不再响应，自动化关闭。
+- 结算道行只在 `_end_run` 中执行，先设置 run_over 并保存奖励，之后才发 UI 信号。
+- 元进度只可在 run_over 时购买；`begin_next_run` 清理 run 字段并保留 talents/meta_points/meta_total/run_number。
+- `reset` 是全档清空，必须保留 UI 的二次确认；普通轮回不要调用它。
+- 自动化沿用普通事务；已付代刮费的 pending ticket 在读档后不能再次收费；菜单、动画暂停；每帧最多揭一格，不补离线收益。
 
-技能价格和解锁来自 JSON，具体行为由 `Game.skill_error/use_skill` 按稳定顺序处理。新增技能要同步按钮/快捷键和回归检查。
+## 存档 schema 3
 
-- 透视、改运、加倍只能在第一块银层被损坏之前用；标记 `started` 必须落盘。
-- 改运先透视，每票一次；已经中奖的票不能反复刷新。龙舟改实际 ×0 运算，其他规则重建第三档合法中奖票面。
-- 好运、连锁、爆发在购票时消耗次数；退出重开不能重新抽票。
-- 自动化通过 `automation_tick(delta)` 使用同一购买、技能、兑奖事务。每票只扣一次代刮精神。
-- 自动只买玩家选择的票种，不擅自升档。备用金按所选票价计算，购票后仍保留指定张数的票钱。
-- 精神不足等待；第二套房解锁自动娱乐，支付后等待活动时长再继续。
-- 自动技能只在已透视后读取结果作决策，不用免费隐藏信息择票。
-- 菜单/手动活动暂停自动化；恢复不追补离线时间；重新打开存档需要手动启动。
-- 游戏停顿后每 tick 至多推进一格，避免卡帧后瞬间扣掉大量资金。
+延用系统目录 `福运人生/progress.json`（不因界面标题改名迁走）。Windows 通常位于 `%APPDATA%/Godot/app_userdata/福运人生/`。写 `.tmp`，flush 后 rename；旧主文件有效才替换 `.bak`。加载时先验证主档，失败读有效备份。游戏过程中自动保存，关闭/失焦时也保存。导出包不会包含个人存档。
 
-`ticket_changed` 表示新票或重建票面；`changed` 表示一般状态更新；`ticket_settled` 表示一次性兑奖。视图不能对每次精神变化重新构造银层。
+新增 run 字段：realm、skulls、wards_used、debt_stage、run_over、rest_cooldown。新增永久字段：talents、meta_points、meta_total、run_number、last_run。当前票新增 skull_index（-1 无图案）、skull_seen、skull_blocked、risk_chance、forfeited（致命作废，允许全揭示但未兑奖）。last_run 保存一次性结算报告和当时的容错上限。
 
-## 消费与数值
+v0.1 旧索引映射、legacy 金额票兼容保留。v0.2 的 collect/lines/sum/pairs/vault 仍能读、画、兑，不会换成新规则；旧票不追加骷髅。按历史 earned/scratched/owned 推导已达境界，免补交突破费；旧已解锁票种写入 unlocked_ids，保留解锁。已完成旧版的存档保持通关，进入轮回界面；本次迁移不重复赠送结算道行。普通旧存档从当前财富继续新剧情，债契未偿。
 
-车的财运/精神由每件资产配置，统一被动为加倍 +2、自动速度 +12%、娱乐 -8%；住宅 `regen` 加精神每秒恢复。第一套房解锁自动组合，第二套房解锁自动娱乐。
+旧版已购票只允许原有的倍化与望气，不允许新规则改命重造。未来删票请保留兼容 evaluator 或增加显式迁移，不能仅移除目录条目。
 
-活动费用为 `max(最低费用, 最高已解锁票价 × price_factor) × 车辆折扣`。活动恢复按精神上限比例计算，增益刷新次数但不累加到无限。清心/手感与奖励增益可以并存，灵感/鸿运奖金取较高值。购票时将适用效果冻结到该票，后续购物不回写旧票倍率。
+## 调数值与发布
 
-新增经济系统时先验证它是否改变玩家决策。不要仅靠提高张数门槛掩盖数值失控。调数值后跑完整模拟，结果保存在 `docs/balance-report.json`。
+编辑 JSON 后更新对应说明/摘要，尤其天赋 per_level 与中文说明要一致。运行：
 
-## 存档
+```bash
+godot --headless --path . --editor --import
+godot --headless --path . --script tests/run_tests.gd -- --test
+godot --headless --path . --script tests/simulate.gd -- --test
+# 图形环境（包括 Linux Xvfb 软件渲染）
+godot --path . -- --smoke
+mkdir -p builds/windows builds/linux builds/web
+godot --headless --path . --export-release "Windows Desktop"
+godot --headless --path . --export-release "Linux"
+```
 
-schema=2。路径仍为 Godot `user://progress.json`，从 v0.1 自动迁移。Windows 通常为 `%APPDATA%/Godot/app_userdata/福运人生/`。
+100 种子模拟自动写 docs/balance-report.json；`--seeds=5` 用于快速排查，不更新正式报告。模拟是积极购买升级、恢复精神、使用技能和防御天赋的固定策略，不等同真人体验，也不证明每一种玩法都能在三轮通关。
 
-旧版索引以 `[joy,bamboo,gold,dragon,fortune]` 映射到新目录。保留旧票原格金额、刮开状态、已加倍/透视标志和已结算状态；为该票使用只读兼容规则 `legacy`，新票使用 v0.2 规则。旧 `luck_armed` 转为一次好运；根据旧门槛推导已解锁票种，保存到 `unlocked_ids`，不会因新门槛被重新锁住。
-
-原子保存写 `.tmp`、flush 后 rename；旧主存档通过验证才复制到 `.bak`。读取失败回退备份。RNG seed/state 用十进制字符串存储；对 JSON 浮点数必须规范化，不能假定 `Array.count(int)` 会匹配 `float`。
-
-## 验证与导出
-
-执行 README 的三个 headless 命令。回归验证 8 种规则、多线/多行兑奖、隐藏格不泄露、成本、技能组合、自动停机、精神恢复、旧存档与备份。`--smoke` 在真实 Godot 渲染中刮一次完整票，截取八种票、菜单和龙舟改运结果，并运行自动循环。该模式不读写正常存档。
-
-导出 Windows / Linux / Web 使用根目录预设；`data/*.json` 显式打进 PCK。所有发行包必须附带 `licenses/`、字体 OFL 和 `THIRD_PARTY_LICENSES.md`。`builds/`、`.godot/` 不入 Git。不能把成功导出 Windows 写成已在 Windows 实机运行。
-
-后续推荐通过真人试玩确定刮擦速度、技能提示、自动娱乐选择与终局节奏，再决定加入转生。菜单可进一步拆成独立场景；本版继续保持核心规则与视图分离。
+Windows 导出嵌入 PCK，需与 `licenses/`、字体 OFL、THIRD_PARTY_LICENSES.md 一同压缩。不要提交 .godot、builds 或个人存档。自动化导出工作流已更新 v0.3 命名，远端是否执行须另查，不能把工作流文件存在当成 CI 通过。

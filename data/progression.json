@@ -2,7 +2,7 @@
   "initial_cash": 80,
   "initial_spirit": 60,
   "goal": 100000000000,
-  "pity_losses": 4,
+  "pity_losses": 7,
   "payout_weights": [
     45,
     28,
@@ -43,223 +43,255 @@
   "skills": [
     {
       "id": "sight",
-      "name": "透视眼",
+      "name": "望气术",
       "cost": 4,
-      "scratched": 0,
-      "capacity": 60,
       "key": "1",
-      "description": "预知本张精确奖金和危险格；再决定改运或加倍。"
+      "description": "购票未刮时预知奖金与骷髅位置；看穿后仍须刮完。",
+      "realm": 0
     },
     {
       "id": "luck",
-      "name": "好运来",
-      "cost": 20,
-      "scratched": 5,
-      "capacity": 60,
+      "name": "祈运诀",
+      "cost": 16,
       "key": "2",
-      "description": "接下来 3 张必中至少第三档奖，头奖概率提高至 10%。"
+      "description": "购票前使用：后续 3 张必中第三档以上；不改变劫印概率。",
+      "realm": 1
     },
     {
       "id": "boost",
-      "name": "就这把了",
-      "cost": 28,
-      "scratched": 8,
-      "capacity": 60,
+      "name": "乾坤倍化",
+      "cost": 22,
       "key": "3",
-      "description": "本张票面奖金 ×8；每辆车再增加 2 倍。"
+      "description": "本张奖金 ×6，每辆灵车再 +2 倍；可叠加活动与连锁。",
+      "realm": 1
     },
     {
       "id": "auto",
-      "name": "念力代刮",
+      "name": "傀儡代刮",
       "cost": 2,
-      "scratched": 12,
-      "capacity": 60,
       "key": "4",
-      "description": "开关自动购票、刮开与兑奖，每张消耗 2 精神。"
+      "description": "自动购票、刮开与兑奖，每张消耗 2 精神；无离线收益。",
+      "realm": 1
     },
     {
       "id": "alchemy",
       "name": "点石成金",
-      "cost": 30,
-      "scratched": 25,
-      "capacity": 80,
+      "cost": 26,
       "key": "5",
-      "description": "未刮票限一次：龙舟 ×0 改 ×2；其他空奖票改成第三档奖。"
+      "description": "先望气：空奖改第三档；龙舟 ×0 变 ×2，劫印不会消失。",
+      "realm": 2
     },
     {
       "id": "chain",
-      "name": "聚宝连锁",
-      "cost": 40,
-      "scratched": 65,
-      "capacity": 140,
+      "name": "聚宝阵",
+      "cost": 36,
       "key": "6",
-      "description": "接下来 5 张新票，奖金依次 ×2、×3、×4、×5、×6。"
+      "description": "后续 5 张奖金依次 ×2、×3、×4、×5、×6。",
+      "realm": 3
     },
     {
       "id": "burst",
-      "name": "福运爆发",
-      "cost": 90,
-      "scratched": 100,
-      "capacity": 200,
+      "name": "天命敕令",
+      "cost": 75,
       "key": "7",
-      "description": "下一张直接锁定票面头奖！每次使用后需刮完 20 张。"
+      "description": "下一张锁定最高票面奖，冷却 18 张；仍可能遭遇劫印。",
+      "realm": 4
+    },
+    {
+      "id": "ward",
+      "key": "8",
+      "name": "替劫符",
+      "cost": 30,
+      "realm": 2,
+      "description": "先望气：消除本张骷髅。每轮仅 1 次，天赋可增加次数。"
     }
   ],
   "activities": [
     {
       "id": "tea",
-      "name": "街边喝茶",
-      "cost": 20,
+      "name": "灵茶温脉",
+      "cost": 12,
       "price_factor": 0.4,
       "restore_ratio": 0.4,
-      "duration": 1.2,
-      "unlock": 0,
+      "duration": 1.5,
+      "realm": 0,
+      "assets": 0,
+      "kind": "home",
       "buff": "focus",
       "charges": 6,
-      "description": "清心 6 张：技能精神消耗减少 25%。"
+      "description": "清心 6 张：技能消耗减少 25%。"
     },
     {
       "id": "massage",
-      "name": "推拿按摩",
-      "cost": 180,
-      "price_factor": 2.0,
+      "name": "药浴洗髓",
+      "cost": 70,
+      "price_factor": 1,
       "restore_ratio": 0.8,
-      "duration": 1.8,
-      "unlock": 350,
+      "duration": 2,
+      "realm": 1,
+      "assets": 0,
+      "kind": "home",
       "buff": "flow",
       "charges": 10,
-      "description": "手感 10 张：自动刮速 ×1.5，手动范围增大。"
+      "description": "轻身 10 张：刮速 ×1.5，硬币范围增加。"
     },
     {
       "id": "trip",
-      "name": "山城小旅行",
-      "cost": 1500,
-      "price_factor": 8.0,
-      "restore_ratio": 1.0,
+      "name": "云游访道",
+      "cost": 600,
+      "price_factor": 3,
+      "restore_ratio": 1,
       "duration": 2.5,
-      "unlock": 30000,
+      "realm": 2,
+      "assets": 1,
+      "kind": "home",
       "buff": "inspired",
       "charges": 12,
-      "description": "灵感 12 张：奖金 ×2，攒精神再爆发。"
+      "description": "悟道 12 张：奖金 ×2；需一座洞府。"
     },
     {
       "id": "sea",
-      "name": "海岛度假",
-      "cost": 18000,
-      "price_factor": 20.0,
-      "restore_ratio": 1.0,
-      "duration": 3.0,
-      "unlock": 2000000,
+      "name": "洞天闭关",
+      "cost": 8000,
+      "price_factor": 6,
+      "restore_ratio": 1,
+      "duration": 3,
+      "realm": 3,
+      "assets": 2,
+      "kind": "home",
+      "buff": "holiday",
+      "charges": 16,
+      "description": "洞天 16 张：奖金 ×3；需两座洞府。"
+    },
+    {
+      "id": "sword",
+      "name": "御剑观海",
+      "cost": 80000,
+      "price_factor": 10,
+      "restore_ratio": 1,
+      "duration": 3,
+      "realm": 4,
+      "assets": 3,
+      "kind": "car",
+      "buff": "flow",
+      "charges": 24,
+      "description": "轻身 24 张并清心 12 张；需三辆灵车。"
+    },
+    {
+      "id": "ritual",
+      "name": "瑶池论道",
+      "cost": 1000000,
+      "price_factor": 14,
+      "restore_ratio": 1,
+      "duration": 4,
+      "realm": 5,
+      "assets": 4,
+      "kind": "home",
       "buff": "holiday",
       "charges": 24,
-      "description": "鸿运 24 张：奖金 ×3，与灵感取高值。"
+      "description": "洞天、轻身、清心各 24 张；需四座洞府。"
     }
   ],
   "assets": [
     {
       "id": "car_1",
-      "name": "二手小钢炮",
+      "name": "青鸾灵车",
       "kind": "car",
-      "price": 2000,
+      "price": 1500,
       "spirit": 20,
       "fortune": 0.05,
-      "gate": 30,
-      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
+      "gate": 20,
+      "description": "倍化 +2 · 代刮速度 +12% · 修炼活动费用 -8%"
     },
     {
       "id": "home_1",
-      "name": "县城阳光小宅",
+      "name": "竹溪小筑",
       "kind": "home",
-      "price": 12000,
+      "price": 8000,
       "spirit": 35,
       "fortune": 0.08,
-      "gate": 60,
-      "description": "开启自动透视 / 改运 / 加倍",
-      "regen": 0.2
+      "gate": 35,
+      "description": "开放傀儡技能组合 · 筑基所需灵契"
     },
     {
       "id": "car_2",
-      "name": "云豹 GT",
+      "name": "逐月飞梭",
       "kind": "car",
-      "price": 80000,
+      "price": 60000,
       "spirit": 25,
       "fortune": 0.12,
-      "gate": 100,
-      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
+      "gate": 60,
+      "description": "倍化 +2 · 代刮速度 +12% · 修炼活动费用 -8%"
     },
     {
       "id": "home_2",
-      "name": "城央大平层",
+      "name": "听雨洞府",
       "kind": "home",
-      "price": 600000,
+      "price": 300000,
       "spirit": 40,
       "fortune": 0.18,
-      "gate": 150,
-      "description": "开启自动娱乐，精神不足自动补充",
-      "regen": 0.3
+      "gate": 90,
+      "description": "开放自动修炼 · 恢复无需手动反复点"
     },
     {
       "id": "car_3",
-      "name": "赤霄跑车",
+      "name": "赤霄仙辇",
       "kind": "car",
-      "price": 5000000,
+      "price": 2000000,
       "spirit": 35,
       "fortune": 0.25,
-      "gate": 220,
-      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
+      "gate": 130,
+      "description": "倍化 +2 · 代刮速度 +12% · 修炼活动费用 -8%"
     },
     {
       "id": "home_3",
-      "name": "湖畔独栋别墅",
+      "name": "栖霞仙居",
       "kind": "home",
-      "price": 25000000,
+      "price": 10000000,
       "spirit": 50,
       "fortune": 0.35,
-      "gate": 320,
-      "description": "自动化速度上限继续提升",
-      "regen": 0.4
+      "gate": 170,
+      "description": "活动恢复效率 +10% · 元婴所需灵契"
     },
     {
       "id": "car_4",
-      "name": "玄龙限量超跑",
+      "name": "玄龙云驾",
       "kind": "car",
-      "price": 100000000,
+      "price": 50000000,
       "spirit": 45,
       "fortune": 0.5,
-      "gate": 420,
-      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
+      "gate": 220,
+      "description": "倍化 +2 · 代刮速度 +12% · 修炼活动费用 -8%"
     },
     {
       "id": "home_4",
-      "name": "云顶空中庄园",
+      "name": "云顶道宫",
       "kind": "home",
-      "price": 500000000,
+      "price": 200000000,
       "spirit": 65,
       "fortune": 0.75,
-      "gate": 520,
-      "description": "长线挂机精神恢复再提升",
-      "regen": 0.6
+      "gate": 280,
+      "description": "解锁瑶池论道 · 化神所需灵契"
     },
     {
       "id": "car_5",
-      "name": "麒麟典藏车王",
+      "name": "麒麟御辇",
       "kind": "car",
-      "price": 2000000000,
+      "price": 1000000000,
       "spirit": 60,
       "fortune": 1,
-      "gate": 650,
-      "description": "加倍技能 +2 倍 · 自动刮速 +12% · 娱乐费用 -8%"
+      "gate": 350,
+      "description": "倍化 +2 · 代刮速度 +12% · 修炼活动费用 -8%"
     },
     {
       "id": "home_5",
-      "name": "山海私人庄园",
+      "name": "山海洞天",
       "kind": "home",
-      "price": 10000000000,
+      "price": 5000000000,
       "spirit": 90,
       "fortune": 1.5,
-      "gate": 780,
-      "description": "精神恢复与收藏最终里程碑",
-      "regen": 0.8
+      "gate": 420,
+      "description": "飞升收藏 · 吐纳恢复量继续增加"
     }
   ],
   "lucky_weights": [
@@ -291,5 +323,257 @@
     0.25,
     0.17
   ],
-  "base_regen": 0.4
+  "base_regen": 0,
+  "realm_fortune": [
+    1,
+    1.4,
+    2,
+    3,
+    4.5,
+    7
+  ],
+  "skull_grace": 5,
+  "debt_seals": [
+    10000,
+    1000000,
+    100000000,
+    10000000000,
+    100000000000
+  ],
+  "realms": [
+    {
+      "name": "凡人",
+      "cost": 0,
+      "earned": 0,
+      "assets": 0,
+      "scratched": 0,
+      "description": "欠下道盟灵债，偶然觉醒望气术。"
+    },
+    {
+      "name": "炼气",
+      "cost": 50,
+      "earned": 50,
+      "assets": 0,
+      "scratched": 5,
+      "description": "引气入体，解锁祈运、倍化与傀儡代刮。"
+    },
+    {
+      "name": "筑基",
+      "cost": 2200,
+      "earned": 6000,
+      "assets": 1,
+      "scratched": 25,
+      "description": "以灵契筑道基，解锁改命与替劫符。"
+    },
+    {
+      "name": "金丹",
+      "cost": 60000,
+      "earned": 150000,
+      "assets": 3,
+      "scratched": 70,
+      "description": "凝结金丹，聚宝连锁将连开五重财运。"
+    },
+    {
+      "name": "元婴",
+      "cost": 1500000,
+      "earned": 5000000,
+      "assets": 5,
+      "scratched": 140,
+      "description": "元婴出窍，天命敕令可召来票面头奖。"
+    },
+    {
+      "name": "化神",
+      "cost": 50000000,
+      "earned": 200000000,
+      "assets": 8,
+      "scratched": 240,
+      "description": "神游九州，偿尽灵债、集齐灵契即可飞升。"
+    }
+  ],
+  "talents": [
+    {
+      "id": "guard",
+      "name": "避劫灵根",
+      "costs": [
+        2,
+        4,
+        6,
+        9,
+        12
+      ],
+      "description": "每级使每张劫印概率降低 10%，最高降低 50%。",
+      "prerequisite": "",
+      "requires": 0,
+      "column": 0,
+      "row": 0,
+      "per_level": 0.1
+    },
+    {
+      "id": "lives",
+      "name": "不灭道心",
+      "costs": [
+        7,
+        14
+      ],
+      "description": "每级增加 1 个可承受的骷髅上限。",
+      "prerequisite": "guard",
+      "requires": 2,
+      "column": 0,
+      "row": 1,
+      "per_level": 1
+    },
+    {
+      "id": "ward",
+      "name": "替命真传",
+      "costs": [
+        12
+      ],
+      "description": "每轮替劫符可额外使用 1 次。",
+      "prerequisite": "lives",
+      "requires": 1,
+      "column": 0,
+      "row": 2,
+      "per_level": 1
+    },
+    {
+      "id": "merit",
+      "name": "悟道轮回",
+      "costs": [
+        6,
+        12
+      ],
+      "description": "每级使本轮结算道行增加 20%。",
+      "prerequisite": "guard",
+      "requires": 1,
+      "column": 0,
+      "row": 3,
+      "per_level": 0.2
+    },
+    {
+      "id": "cash",
+      "name": "宿世积蓄",
+      "costs": [
+        2,
+        3,
+        5,
+        8,
+        12
+      ],
+      "description": "每级使新一轮初始金钱增加 ¥100。",
+      "prerequisite": "",
+      "requires": 0,
+      "column": 1,
+      "row": 0,
+      "per_level": 100
+    },
+    {
+      "id": "fortune",
+      "name": "聚宝灵根",
+      "costs": [
+        3,
+        5,
+        8,
+        12
+      ],
+      "description": "每级使所有新票奖金增加 15%。",
+      "prerequisite": "cash",
+      "requires": 1,
+      "column": 1,
+      "row": 1,
+      "per_level": 0.15
+    },
+    {
+      "id": "break",
+      "name": "破境传承",
+      "costs": [
+        5,
+        8,
+        12
+      ],
+      "description": "每级使境界突破花费降低 15%。",
+      "prerequisite": "fortune",
+      "requires": 2,
+      "column": 1,
+      "row": 2,
+      "per_level": 0.15
+    },
+    {
+      "id": "yield",
+      "name": "灵契共鸣",
+      "costs": [
+        6,
+        10,
+        14
+      ],
+      "description": "每级使灵契提供的财运加成增加 20%。",
+      "prerequisite": "break",
+      "requires": 1,
+      "column": 1,
+      "row": 3,
+      "per_level": 0.2
+    },
+    {
+      "id": "spirit",
+      "name": "识海初开",
+      "costs": [
+        2,
+        4,
+        7,
+        10
+      ],
+      "description": "每级增加 15 点精神上限。",
+      "prerequisite": "",
+      "requires": 0,
+      "column": 2,
+      "row": 0,
+      "per_level": 15
+    },
+    {
+      "id": "focus",
+      "name": "凝神守一",
+      "costs": [
+        3,
+        5,
+        8,
+        12
+      ],
+      "description": "每级使所有技能消耗降低 5%。",
+      "prerequisite": "spirit",
+      "requires": 1,
+      "column": 2,
+      "row": 1,
+      "per_level": 0.05
+    },
+    {
+      "id": "rest",
+      "name": "吐纳真解",
+      "costs": [
+        4,
+        7,
+        11
+      ],
+      "description": "每级使主动吐纳额外恢复 10 点。",
+      "prerequisite": "focus",
+      "requires": 1,
+      "column": 2,
+      "row": 2,
+      "per_level": 10
+    },
+    {
+      "id": "speed",
+      "name": "御傀真传",
+      "costs": [
+        6,
+        10,
+        14
+      ],
+      "description": "每级使代刮速度增加 15%。",
+      "prerequisite": "focus",
+      "requires": 2,
+      "column": 2,
+      "row": 3,
+      "per_level": 0.15
+    }
+  ],
+  "skull_limit": 3
 }

@@ -10,7 +10,7 @@ func _ready() -> void:
 		player.volume_db = -15.0
 		add_child(player)
 		players.append(player)
-	for spec in [["click", 620.0, 0.06], ["reveal", 960.0, 0.12], ["win", 880.0, 0.3], ["big", 1320.0, 0.75], ["skill", 440.0, 0.4], ["scratch", 180.0, 0.06]]:
+	for spec in [["click", 620.0, 0.06], ["reveal", 960.0, 0.12], ["win", 880.0, 0.3], ["big", 1320.0, 0.75], ["skill", 440.0, 0.4], ["scratch", 180.0, 0.06], ["skull", 130.0, 0.55]]:
 		sounds[spec[0]] = synth(float(spec[1]), float(spec[2]), spec[0] == "scratch")
 
 func synth(frequency: float, duration: float, noise: bool) -> AudioStreamWAV:
@@ -40,3 +40,12 @@ func play(sound: String) -> void:
 			player.stream = sounds[sound]
 			player.play()
 			return
+
+func stop_all() -> void:
+	for player in players:
+		player.stop()
+		player.stream=null
+
+func _exit_tree() -> void:
+	stop_all()
+	sounds.clear()
